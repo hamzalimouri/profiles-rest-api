@@ -13,15 +13,15 @@ class UserProfileManager(BaseUserManager):
         user = self.model(email=email, first_name=first_name,
                           last_name=last_name)
 
-        user.setpassword(password=password)
+        user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, first_name, last_name, password=None):
+    def create_superuser(self, email, first_name, last_name, password):
         """Create and save a new superuser with given details"""
         user = self.create_user(
-            email=email, first_name=first_name, last_name=last_name)
+            email=email, first_name=first_name, last_name=last_name, password=password)
 
         user.is_superuser = True
         user.is_staff = True

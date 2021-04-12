@@ -1,5 +1,4 @@
-from django.db.models.query import QuerySet
-from rest_framework import viewsets, status
+from rest_framework import viewsets, filters
 from rest_framework.authentication import TokenAuthentication
 
 from profiles_api import serializers, models, permissions
@@ -11,3 +10,5 @@ class UserProfileViewSets(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication, )
     permission_classes = (permissions.UpdateOwnProfile, )
+    filter_backends = (filters.SearchFilter, )
+    search_fields = ("first_name", "last_name", "email", )
